@@ -1,26 +1,27 @@
 import "./App.css";
-import Header from "./components/Header";
-import Main from "./components/Main";
-import Footer from "./components/Footer";
-import Button from "./components/Button";
+import { useState } from "react";
 
 function App() {
-  // props로 전달할 값이 많다면 객체&spread 연산자 이용해 전달
-  const buttonProps = {
-    text: "메일",
-    color: "red",
-    a: 1,
-    b: 2,
-    c: 3,
-  };
+  // useState
+  // 초기 값을 인수로 받음
+  // 두 개의 요소를 담은 배열 반환 [state 현재값, state 값 변화시키는 함수]
+  const [count, setCount] = useState(0);
+  const [light, setLight] = useState("OFF");
+
   return (
     <>
-      <Button {...buttonProps} />
-      <Button text={"카페"} />
-      <Button text={"블로그"}>
-        {/* children 이라는 props로 전달됨 */}
-        <div>자식요소</div>
-      </Button>
+      <h1>{light}</h1>
+      <button
+        onClick={() => {
+          setLight(light === "ON" ? "OFF" : "ON");
+        }}
+      >
+        {light === "ON" ? "끄기" : "켜기"}
+      </button>
+      <div>
+        <h1>{count}</h1>
+        <button onClick={() => setCount(count + 1)}>+</button>
+      </div>
     </>
   );
 }
