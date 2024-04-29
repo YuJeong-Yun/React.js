@@ -1,27 +1,17 @@
+// 컴포넌트 리렌더링 되는 3가지 경우
+// 1. 자신이 관리하는 state의 값이 변경되었을 때
+// 2. 자신이 제공받는 props의 값이 변경되었을 때
+// 3. 부모 컴포넌트가 리렌더링 되면 자식 컴포넌트도 리렌더링 됨
+
 import "./App.css";
-import { useState } from "react";
+import Bulb from "./components/Bulb";
+import Counter from "./components/Counter";
 
 function App() {
-  // useState
-  // 초기 값을 인수로 받음
-  // 두 개의 요소를 담은 배열 반환 [state 현재값, state 값 변화시키는 함수]
-  const [count, setCount] = useState(0);
-  const [light, setLight] = useState("OFF");
-
   return (
     <>
-      <h1>{light}</h1>
-      <button
-        onClick={() => {
-          setLight(light === "ON" ? "OFF" : "ON");
-        }}
-      >
-        {light === "ON" ? "끄기" : "켜기"}
-      </button>
-      <div>
-        <h1>{count}</h1>
-        <button onClick={() => setCount(count + 1)}>+</button>
-      </div>
+      <Bulb />
+      <Counter />
     </>
   );
 }
