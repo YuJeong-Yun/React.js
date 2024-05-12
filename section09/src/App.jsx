@@ -66,11 +66,12 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
-    </div>
+    // <div className="App">
+    //   <Header />
+    //   <Editor onCreate={onCreate} />
+    //   <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+    // </div>
+    <Exam />
   );
 }
 
