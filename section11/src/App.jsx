@@ -1,5 +1,11 @@
 import "./App.css";
-import { useState, useRef, useReducer, useCallback } from "react";
+import {
+  useState,
+  useRef,
+  useReducer,
+  useCallback,
+  createContext,
+} from "react";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
 import List from "./components/List";
@@ -40,6 +46,10 @@ function reducer(state, action) {
   }
 }
 
+// 컨텍스트는 보통 컴포넌트 외부에 선언
+// (컴포넌트 내부에 선언하면 리렌더링 ㅗ딜 때 마다 새로운 컨텍스트 생성하게 됨)
+export const TodoContext = createContext();
+
 function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef(3);
@@ -76,8 +86,20 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      {/* provider 컴포넌트 아래에 있는 모든 컴포넌트들은 전부 다
+      이 TodoContext의 데이터를 공급받을 수 있음
+       */}
+      <TodoContext.Provider
+        value={{
+          todos,
+          onCreate,
+          onUpdate,
+          onDelete,
+        }}
+      >
+        <Editor />
+        <List />
+      </TodoContext.Provider>
     </div>
   );
 }
