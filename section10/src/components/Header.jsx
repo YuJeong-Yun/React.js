@@ -1,4 +1,5 @@
 import "./Header.css";
+import { memo } from "react";
 
 function Header() {
   return (
@@ -9,4 +10,7 @@ function Header() {
   );
 }
 
-export default Header;
+// 아래처럼 한 줄로 가능
+// const memoizedHeader = memo(Header);
+// export default memoizedHeader;
+export default memo(Header);
