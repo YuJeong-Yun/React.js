@@ -5,6 +5,7 @@ import {
   useReducer,
   useCallback,
   createContext,
+  useMemo,
 } from "react";
 import Header from "./components/Header";
 import Editor from "./components/Editor";
@@ -47,8 +48,9 @@ function reducer(state, action) {
 }
 
 // 컨텍스트는 보통 컴포넌트 외부에 선언
-// (컴포넌트 내부에 선언하면 리렌더링 ㅗ딜 때 마다 새로운 컨텍스트 생성하게 됨)
-export const TodoContext = createContext();
+// (컴포넌트 내부에 선언하면 리렌더링 될 때 마다 새로운 컨텍스트 생성하게 됨)
+export const TodoStateContext = createContext(); // 변경될 수 있는 값(todos)
+export const TodoDispatchContext = createContext(); // 변경되지 않는 값(onCreate, onUpdate, onDelete)
 
 function App() {
   const [todos, dispatch] = useReducer(reducer, mockData);
@@ -83,23 +85,22 @@ function App() {
     });
   }, []);
 
+  const memoizedDispatch = useMemo(() => {
+    return { onCreate, onUpdate, onDelete };
+  }, []);
+
   return (
     <div className="App">
       <Header />
       {/* provider 컴포넌트 아래에 있는 모든 컴포넌트들은 전부 다
       이 TodoContext의 데이터를 공급받을 수 있음
        */}
-      <TodoContext.Provider
-        value={{
-          todos,
-          onCreate,
-          onUpdate,
-          onDelete,
-        }}
-      >
-        <Editor />
-        <List />
-      </TodoContext.Provider>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   );
 }
