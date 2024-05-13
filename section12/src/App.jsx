@@ -7,9 +7,10 @@ import Home from "./pages/Home";
 import Diary from "./pages/Diary";
 import New from "./pages/New";
 import NotFount from "./pages/NotFound";
+import Button from "./components/Button";
+import Header from "./components/Header";
 
-import { getEmotionImage} from "./util/get-emotion-image";
-
+import { getEmotionImage } from "./util/get-emotion-image";
 
 function App() {
   const nav = useNavigate();
@@ -19,24 +20,36 @@ function App() {
   };
 
   return (
-    // 여기는 모든 페이지에 공통으로 들어가는 부분
     <>
-      <div>
-        <img src={getEmotionImage(1)} />
-        <img src={getEmotionImage(2)} />
-        <img src={getEmotionImage(3)} />
-      </div>
-      <div>
-        <Link to={"/"}>Home</Link>
-        <Link to={"/new"}>New</Link>
-        <Link to={"/Diary"}>Diary</Link>
-      </div>
-      <button onClick={onClickButton}>New 페이지로 이동</button>
+      <Header
+        title={"Header"}
+        leftChild={<Button text={"left"} />}
+        rightChild={<Button text={"Right"} />}
+      />
+      <Button
+        text={"123"}
+        type={"DEFAULT"}
+        onClick={() => {
+          console.log("123번 버튼 클릭");
+        }}
+      />
+      <Button
+        text={"123"}
+        type={"POSITIVE"}
+        onClick={() => {
+          console.log("123번 버튼 클릭");
+        }}
+      />
+      <Button
+        text={"123"}
+        type={"NEGATIVE"}
+        onClick={() => {
+          console.log("123번 버튼 클릭");
+        }}
+      />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
-        {/* URL Parameter 는 /:이름 이렇게 설정 */}
-        {/* Query String은 받는 곳에서만 설정하면 됨 */}
         <Route path="/diary/:id" element={<Diary />}></Route>
         <Route path="*" element={<NotFount />} />
       </Routes>
