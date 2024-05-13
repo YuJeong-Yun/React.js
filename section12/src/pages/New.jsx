@@ -1,6 +1,6 @@
 function New() {
   return (
-    <div>New;</div>
+    <div>New</div>
   )
 }
 
