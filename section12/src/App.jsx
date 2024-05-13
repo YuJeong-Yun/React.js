@@ -1,3 +1,6 @@
+// - URL Parmaeter : ~/product/1
+// - Query String :  ~/search?q=검색어
+
 import "./App.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
@@ -27,7 +30,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/new" element={<New />}></Route>
-        <Route path="/diary" element={<Diary />}></Route>
+        {/* URL Parameter 는 /:이름 이렇게 설정 */}
+        {/* Query String은 받는 곳에서만 설정하면 됨 */}
+        <Route path="/diary/:id" element={<Diary />}></Route>
         <Route path="*" element={<NotFount />} />
       </Routes>
     </>
