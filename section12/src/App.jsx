@@ -1,5 +1,5 @@
-// - URL Parmaeter : ~/product/1
-// - Query String :  ~/search?q=검색어
+// 이미지는 assets 폴더 아래에 -> 브라우저가 캐싱해서 이미지 최적화 가능
+// but 이미지가 많을 때에는 캐싱 용량이 많아지므로 public 폴더 아래에 두는게 나을 수도 있음
 
 import "./App.css";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -8,9 +8,9 @@ import Diary from "./pages/Diary";
 import New from "./pages/New";
 import NotFount from "./pages/NotFound";
 
-// 1. "/" : 모든 일기를 조회하는 Home 페이지
-// 2. "/new" : 새로운 일기를 작성하는 new 페이지
-// 3. "/diary" : 일기를 상세히 조회하는 Diary 페이지
+import { getEmotionImage} from "./util/get-emotion-image";
+
+
 function App() {
   const nav = useNavigate();
 
@@ -21,6 +21,11 @@ function App() {
   return (
     // 여기는 모든 페이지에 공통으로 들어가는 부분
     <>
+      <div>
+        <img src={getEmotionImage(1)} />
+        <img src={getEmotionImage(2)} />
+        <img src={getEmotionImage(3)} />
+      </div>
       <div>
         <Link to={"/"}>Home</Link>
         <Link to={"/new"}>New</Link>
