@@ -1,10 +1,18 @@
-// Query String으로 받는 법
-import { useSearchParams } from "react-router-dom";
+import Header from "../components/Header";
+import Button from "../components/Button";
+import DiaryList from "../components/DiaryList";
 
 function Home() {
-  const [params, setParmas] = useSearchParams();
-
-  return <div>{params.get("value")}</div>;
+  return (
+    <div>
+      <Header
+        title={"2024년 2월"}
+        leftChild={<Button text={"<"} />}
+        rightChild={<Button text={">"} />}
+      />
+      <DiaryList />
+    </div>
+  );
 }
 
 export default Home;
